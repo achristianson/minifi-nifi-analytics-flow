@@ -1,0 +1,6 @@
+/flowfile_checkpoint/
+/flowfile_repository/
+/logs/
+/provenance_repository/
+/synthesized_output/
+*.swp
