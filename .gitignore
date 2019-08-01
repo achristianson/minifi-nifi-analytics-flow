@@ -5,3 +5,4 @@
 /synthesized_output/
 *.swp
 /content_repository/
+/py3-env

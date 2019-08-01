@@ -17,16 +17,22 @@ Flow Controller:
   name: MiNiFi Flow
 Processors: 
 
+  - name: Dashboard
+    class: Dashboard
+    scheduling strategy: TIMER_DRIVEN
+    scheduling period: 100 ms
+
   - name: Synthesize
     class: SynthesizeNiFiMetrics
-    scheduling strategy: TIMER_DRIVEN
-    scheduling period: 10 sec
+    scheduling strategy: EVENT_DRIVEN
+    #scheduling strategy: TIMER_DRIVEN
+    #scheduling period: 10 sec
 
   - name: Log
     class: LogAttribute
     scheduling strategy: EVENT_DRIVEN
-#    scheduling strategy: TIMER_DRIVEN
-#    scheduling period: 1 sec
+    #scheduling strategy: TIMER_DRIVEN
+    #scheduling period: 1 sec
     auto-terminated relationships list:
       - success
       - failure
@@ -44,6 +50,10 @@ Processors:
       - failure
 
 Connections:
+
+  - source name: Dashboard
+    source relationship name: success
+    destination name: Synthesize
 
 #  - source name: Synthesize
 #    source relationship name: success
