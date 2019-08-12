@@ -17,10 +17,17 @@ Flow Controller:
   name: MiNiFi Flow
 Processors: 
 
-  - name: Dashboard
-    class: Dashboard
+#  - name: Dashboard
+#    class: Dashboard
+#    scheduling strategy: TIMER_DRIVEN
+#    scheduling period: 100 ms
+
+  - name: SynthesizeInput
+    class: GetFile
     scheduling strategy: TIMER_DRIVEN
     scheduling period: 100 ms
+    Properties:
+      Input Directory: synthesized_input
 
   - name: Synthesize
     class: SynthesizeNiFiMetrics
@@ -51,7 +58,7 @@ Processors:
 
 Connections:
 
-  - source name: Dashboard
+  - source name: SynthesizeInput
     source relationship name: success
     destination name: Synthesize
 
